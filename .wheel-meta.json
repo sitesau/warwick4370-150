@@ -1,0 +1,17 @@
+{
+  "wheel_id": 87,
+  "slug": "warwick4370-150",
+  "project": "local-businesses-warwick-w-150",
+  "parent_t1_ref": "warwick4370-001",
+  "node_role": "buffer",
+  "money_target": "warwick4370.com.au",
+  "primary_kw": "local businesses warwick",
+  "intended_url": "https://local-businesses-warwick-w-150.onrender.com/",
+  "links": [
+    {
+      "target_url": "https://local-businesses-warwick-guide.vercel.app/",
+      "anchor": "local businesses warwick",
+      "rel": "follow"
+    }
+  ]
+}
