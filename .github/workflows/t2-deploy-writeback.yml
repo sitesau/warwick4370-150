@@ -190,8 +190,15 @@ jobs:
 
           # Path host convention: the built HTML file is keyword-named (e.g.
           # bathroom-renovation-cost-camberwell.html), NOT necessarily index.html.
-          for f in glob.glob("*.html"):
+          html_files = sorted(glob.glob("*.html"))
+          if not html_files:
+              raise RuntimeError("no html files found for S3 deploy")
+          for f in html_files:
               with_retry(s3.upload_file, f, project, f, ExtraArgs={"ContentType": "text/html"})
+          if "index.html" not in html_files:
+              # T2 path-host URLs point at /index.html. Keep the keyword HTML too,
+              # but publish an index alias so the evidence gate and upstream links are live.
+              with_retry(s3.upload_file, html_files[0], project, "index.html", ExtraArgs={"ContentType": "text/html"})
           for pattern in ("*.jpg", "*.png", "*.txt", "*.xml"):
               for f in glob.glob(pattern):
                   if f.startswith("."):
